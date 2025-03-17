@@ -38,21 +38,21 @@ export default function Home() {
       {/* Modal */}
       {isModalOpen && modalContent && (
         <div 
-          className="fixed inset-0 bg-black/50 z-[60] flex items-start justify-center p-4 md:p-6 overscroll-none overflow-y-auto"
+          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 md:p-6 overscroll-none"
           onClick={closeModal}
         >
           <motion.div 
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="relative bg-white rounded-lg w-full max-w-2xl my-20 overflow-hidden"
+            className="bg-white rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto overscroll-contain"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="sticky top-0 bg-white z-10 px-4 sm:px-6 py-4 border-b flex justify-between items-center">
-              <h2 className="text-xl md:text-2xl font-bold truncate pr-8">{modalContent.title}</h2>
+            <div className="sticky top-0 bg-white z-10 px-6 py-4 border-b flex justify-between items-center">
+              <h2 className="text-xl md:text-2xl font-bold truncate">{modalContent.title}</h2>
               <button 
                 onClick={closeModal}
-                className="absolute right-4 top-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                 aria-label="Close modal"
               >
                 <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,14 +60,15 @@ export default function Home() {
                 </svg>
               </button>
             </div>
-            <div className="px-4 sm:px-6 py-6">
+            <div className="p-6">
               {modalContent.image && (
-                <div className="relative h-48 md:h-64 mb-6 rounded-lg overflow-hidden">
+                <div className="relative h-48 md:h-64 mb-6">
                   <Image
                     src={modalContent.image}
                     alt={modalContent.title}
                     fill
                     style={{ objectFit: 'cover' }}
+                    className="rounded-lg"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     priority
                   />
@@ -119,7 +120,7 @@ export default function Home() {
                   )}
                 </div>
               )}
-              <div className="flex flex-col sm:flex-row gap-3 mt-6">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={closeModal}
                   className="w-full sm:w-auto bg-navy-900 text-white px-6 py-3 rounded-lg hover:bg-navy-800 transition-colors text-base md:text-lg font-medium"

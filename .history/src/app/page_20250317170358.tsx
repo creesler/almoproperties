@@ -38,14 +38,14 @@ export default function Home() {
       {/* Modal */}
       {isModalOpen && modalContent && (
         <div 
-          className="fixed inset-0 bg-black/50 z-[60] flex items-start justify-center p-4 md:p-6 overscroll-none overflow-y-auto"
+          className="fixed inset-0 bg-black/50 z-50 flex items-start justify-center p-4 md:p-6 overscroll-none overflow-y-auto"
           onClick={closeModal}
         >
           <motion.div 
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="relative bg-white rounded-lg w-full max-w-2xl my-20 overflow-hidden"
+            className="relative bg-white rounded-lg w-full max-w-2xl my-8 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="sticky top-0 bg-white z-10 px-4 sm:px-6 py-4 border-b flex justify-between items-center">

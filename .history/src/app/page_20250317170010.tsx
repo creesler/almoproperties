@@ -38,105 +38,91 @@ export default function Home() {
       {/* Modal */}
       {isModalOpen && modalContent && (
         <div 
-          className="fixed inset-0 bg-black/50 z-[60] flex items-start justify-center p-4 md:p-6 overscroll-none overflow-y-auto"
+          className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
           onClick={closeModal}
         >
           <motion.div 
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="relative bg-white rounded-lg w-full max-w-2xl my-20 overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="sticky top-0 bg-white z-10 px-4 sm:px-6 py-4 border-b flex justify-between items-center">
-              <h2 className="text-xl md:text-2xl font-bold truncate pr-8">{modalContent.title}</h2>
-              <button 
-                onClick={closeModal}
-                className="absolute right-4 top-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
-                aria-label="Close modal"
-              >
-                <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            <div className="px-4 sm:px-6 py-6">
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-4">
+                <h2 className="text-2xl font-bold">{modalContent.title}</h2>
+                <button 
+                  onClick={closeModal}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
               {modalContent.image && (
-                <div className="relative h-48 md:h-64 mb-6 rounded-lg overflow-hidden">
+                <div className="relative h-64 mb-4">
                   <Image
                     src={modalContent.image}
                     alt={modalContent.title}
                     fill
                     style={{ objectFit: 'cover' }}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    priority
+                    className="rounded-lg"
                   />
                 </div>
               )}
-              <p className="text-gray-600 mb-6 text-base md:text-lg">{modalContent.description}</p>
+              <p className="text-gray-600 mb-4">{modalContent.description}</p>
               {modalContent.details && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                <div className="grid grid-cols-2 gap-4">
                   {modalContent.details.bedrooms && (
-                    <div className="flex items-center p-3 bg-gray-50 rounded-lg">
-                      <svg className="w-6 h-6 mr-3 text-navy-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 mr-2 text-navy-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                       </svg>
-                      <span className="text-gray-700">{modalContent.details.bedrooms} Bedrooms</span>
+                      <span>{modalContent.details.bedrooms} Bedrooms</span>
                     </div>
                   )}
                   {modalContent.details.bathrooms && (
-                    <div className="flex items-center p-3 bg-gray-50 rounded-lg">
-                      <svg className="w-6 h-6 mr-3 text-navy-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 mr-2 text-navy-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                       </svg>
-                      <span className="text-gray-700">{modalContent.details.bathrooms} Bathrooms</span>
+                      <span>{modalContent.details.bathrooms} Bathrooms</span>
                     </div>
                   )}
                   {modalContent.details.size && (
-                    <div className="flex items-center p-3 bg-gray-50 rounded-lg">
-                      <svg className="w-6 h-6 mr-3 text-navy-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 mr-2 text-navy-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                       </svg>
-                      <span className="text-gray-700">{modalContent.details.size}</span>
+                      <span>{modalContent.details.size}</span>
                     </div>
                   )}
                   {modalContent.details.price && (
-                    <div className="flex items-center p-3 bg-gray-50 rounded-lg">
-                      <svg className="w-6 h-6 mr-3 text-navy-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 mr-2 text-navy-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
-                      <span className="text-gray-700">{modalContent.details.price}</span>
+                      <span>{modalContent.details.price}</span>
                     </div>
                   )}
                   {modalContent.details.location && (
-                    <div className="flex items-center p-3 bg-gray-50 rounded-lg sm:col-span-2">
-                      <svg className="w-6 h-6 mr-3 text-navy-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex items-center col-span-2">
+                      <svg className="w-5 h-5 mr-2 text-navy-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
-                      <span className="text-gray-700">{modalContent.details.location}</span>
+                      <span>{modalContent.details.location}</span>
                     </div>
                   )}
                 </div>
               )}
-              <div className="flex flex-col sm:flex-row gap-3 mt-6">
-                <button
-                  onClick={closeModal}
-                  className="w-full sm:w-auto bg-navy-900 text-white px-6 py-3 rounded-lg hover:bg-navy-800 transition-colors text-base md:text-lg font-medium"
-                >
-                  Close
-                </button>
-                <button
-                  onClick={() => {
-                    closeModal();
-                    const contactSection = document.getElementById('contact');
-                    contactSection?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="w-full sm:w-auto border-2 border-navy-900 text-navy-900 px-6 py-3 rounded-lg hover:bg-navy-900 hover:text-white transition-colors text-base md:text-lg font-medium"
-                >
-                  Contact Us
-                </button>
-              </div>
+              <button
+                onClick={closeModal}
+                className="mt-6 bg-navy-900 text-white px-6 py-2 rounded-md hover:bg-navy-800 transition-colors"
+              >
+                Close
+              </button>
             </div>
           </motion.div>
         </div>
